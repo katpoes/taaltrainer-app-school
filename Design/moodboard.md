@@ -1,0 +1,3 @@
+In dit bestand zullen we kort beschrijven waarom we de keuzes hebben gemaakt voor het design van de moodboard.
+
+In het design van de moodboard hebben we de eisen en voorkeuren van de klant grafisch naar voren gebracht. Dit hebben we gedaan door middel van plaatjes toevoegen die illustreren wat er van ons verwacht wordt. Ook hebben we in de plaatjes en in het design van de moodboard alleen kleuren gebruikt die overeenkomen met de kleuren en accenten die onze klant graag wilt zien in het eindproduct. Ook hebben we rekening gehouden met de sfeer van de moodboad. Deze komt ook overeen met wat er gevraagd is van ons (namelijk een rustig en minimalistisch design). Dit valt dus ook terug te zien in ons moodboard.
