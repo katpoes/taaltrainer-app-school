@@ -2,8 +2,10 @@
 session_start();
 
 if(!isset($_SESSION["user_id"])){
+
 header("Location: pages/login.php");
 exit;
+
 }
 ?>
 
@@ -15,16 +17,12 @@ exit;
 
 <p>Welkom <?php echo $_SESSION["username"]; ?></p>
 
-<div class="menu">
+<a class="btn" href="pages/lesson.php">Start les</a>
 
-<a href="pages/lesson.php" class="btn">Start standaard les</a>
+<a class="btn" href="pages/custom_lesson.php">Custom les</a>
 
-<a href="pages/custom_lesson.php" class="btn">Start custom les</a>
+<a class="btn" href="pages/custom.php">Eigen woorden</a>
 
-<a href="pages/custom.php" class="btn">Eigen woorden toevoegen</a>
-
-<a href="pages/logout.php" class="btn logout">Logout</a>
-
-</div>
+<a class="btn logout" href="pages/logout.php">Logout</a>
 
 </div>

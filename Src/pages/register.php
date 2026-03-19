@@ -4,12 +4,15 @@ require_once "../classes/db.php";
 if(isset($_POST["register"])){
 
 $username=$_POST["username"];
+
 $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
 
 $stmt=$pdo->prepare("INSERT INTO users(username,password) VALUES (?,?)");
+
 $stmt->execute([$username,$password]);
 
 header("Location: login.php");
+
 }
 ?>
 
@@ -17,13 +20,13 @@ header("Location: login.php");
 
 <div class="container">
 
-<h2>Registreren</h2>
+<h2>Register</h2>
 
 <form method="POST">
 
-<input type="text" name="username" required>
+<input name="username">
 
-<input type="password" name="password" required>
+<input type="password" name="password">
 
 <button name="register" class="btn">Register</button>
 

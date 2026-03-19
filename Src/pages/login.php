@@ -23,7 +23,9 @@ header("Location: ../index.php");
 exit;
 
 }else{
+
 $error="Login fout";
+
 }
 
 }
@@ -39,14 +41,14 @@ $error="Login fout";
 
 <form method="POST">
 
-<input type="text" name="username" placeholder="username" required>
+<input name="username" placeholder="username">
 
-<input type="password" name="password" placeholder="password" required>
+<input type="password" name="password">
 
 <button name="login" class="btn">Login</button>
 
 </form>
 
-<a href="register.php">Account maken</a>
+<a href="register.php">Register</a>
 
 </div>
