@@ -21,8 +21,6 @@ exit;
 
 <a class="btn" href="pages/custom_lesson.php">Custom les</a>
 
-<a class="btn" href="pages/custom.php">Eigen woorden</a>
-
 <a class="btn logout" href="pages/logout.php">Logout</a>
 
 </div>

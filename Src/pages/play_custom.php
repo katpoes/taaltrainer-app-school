@@ -7,14 +7,20 @@ header("Location: login.php");
 exit;
 }
 
+$lesson=$_GET["id"];
+
 /* feedback reset */
 $feedback="";
 
-/* woord ophalen */
-$stmt=$pdo->query("SELECT * FROM words ORDER BY RAND() LIMIT 1");
+/* woord ophalen uit custom les */
+$stmt=$pdo->prepare("SELECT * FROM custom_lesson_words WHERE lesson_id=? ORDER BY RAND() LIMIT 1");
+
+$stmt->execute([$lesson]);
+
 $data=$stmt->fetch();
 
 /* antwoord controleren */
+
 if(isset($_POST["answer"])){
 
 $user=strtolower(trim($_POST["answer"]));
@@ -32,39 +38,25 @@ $feedback="Fout! Correct antwoord: ".$correct;
 
 }
 
-/* multiple choice opties */
-$stmt=$pdo->query("SELECT swedish_word FROM words ORDER BY RAND() LIMIT 3");
-$options=$stmt->fetchAll();
-
-$options[]=["swedish_word"=>$data["swedish_word"]];
-
-shuffle($options);
-
 ?>
 
 <link rel="stylesheet" href="../css/style.css">
 
 <div class="container">
 
-<h2>Les</h2>
+<h2>Custom Les</h2>
 
 <?php if($feedback==""){ ?>
 
-<!-- vraag -->
-
-<p>Wat is <b><?php echo $data["dutch_word"]; ?></b> in het Zweeds?</p>
+<p><?php echo $data["dutch_word"]; ?></p>
 
 <form method="POST">
 
+<input name="answer" placeholder="Typ Zweeds woord">
+
 <input type="hidden" name="correct" value="<?php echo $data["swedish_word"]; ?>">
 
-<?php
-foreach($options as $opt){
-
-echo '<button class="btn option" name="answer" value="'.$opt["swedish_word"].'">'.$opt["swedish_word"].'</button>';
-
-}
-?>
+<button class="btn">Controleer</button>
 
 </form>
 
@@ -74,7 +66,7 @@ echo '<button class="btn option" name="answer" value="'.$opt["swedish_word"].'">
 
 <p><?php echo $feedback; ?></p>
 
-<a class="btn" href="lesson.php">Volgende vraag</a>
+<a class="btn" href="play_custom.php?id=<?php echo $lesson; ?>">Volgende vraag</a>
 
 <?php } ?>
 

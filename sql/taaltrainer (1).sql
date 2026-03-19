@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2026 at 12:18 PM
+-- Generation Time: Mar 19, 2026 at 09:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,24 +24,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_words`
+-- Table structure for table `custom_lessons`
 --
 
-CREATE TABLE `custom_words` (
+CREATE TABLE `custom_lessons` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `lesson_name` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `custom_lessons`
+--
+
+INSERT INTO `custom_lessons` (`id`, `user_id`, `lesson_name`) VALUES
+(1, 2, 'woorden');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_lesson_words`
+--
+
+CREATE TABLE `custom_lesson_words` (
+  `id` int(11) NOT NULL,
+  `lesson_id` int(11) DEFAULT NULL,
   `dutch_word` varchar(100) DEFAULT NULL,
   `swedish_word` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `custom_words`
+-- Dumping data for table `custom_lesson_words`
 --
 
-INSERT INTO `custom_words` (`id`, `user_id`, `dutch_word`, `swedish_word`) VALUES
-(1, 1, 'hond', 'hund'),
-(2, 1, 'kat', 'katt'),
-(3, 1, 'boom', 'träd');
+INSERT INTO `custom_lesson_words` (`id`, `lesson_id`, `dutch_word`, `swedish_word`) VALUES
+(1, 1, 'asd', 'asd'),
+(2, 1, 'dsad', 'dasdsada'),
+(3, 1, 'aflilghwf ewf', 'f;ewkfjoiefhl jf');
 
 -- --------------------------------------------------------
 
@@ -130,8 +149,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'testuser', '$2y$10$wHnqz5BvX7TQ9Qz9Zz0b0uY8kG5LJd8jGk0kP4G9Y2v6YJ7K4F0hS'),
-(2, 'Thomas', '$2y$10$j2CnfMbJ1C6K39VQ7Wt/8eQoMmghe746w9Hmgs2Ig7C6nK5BV4sxW');
+(2, 'Thomas', '$2y$10$j2CnfMbJ1C6K39VQ7Wt/8eQoMmghe746w9Hmgs2Ig7C6nK5BV4sxW'),
+(3, 'testuser', '$2y$10$pIDEVZayy7TpJ7NIQzUetO6NNNW6GxD8.4NRWkRfIC4RabVPK0LDK');
 
 -- --------------------------------------------------------
 
@@ -143,54 +162,56 @@ CREATE TABLE `words` (
   `id` int(11) NOT NULL,
   `dutch_word` varchar(100) DEFAULT NULL,
   `swedish_word` varchar(100) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL
+  `level` int(11) DEFAULT NULL,
+  `example_nl` text DEFAULT NULL,
+  `example_sv` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `words`
 --
 
-INSERT INTO `words` (`id`, `dutch_word`, `swedish_word`, `level`) VALUES
-(1, 'hallo', 'hej', NULL),
-(2, 'goedemorgen', 'god morgon', NULL),
-(3, 'goedenavond', 'god kväll', NULL),
-(4, 'tot ziens', 'hej då', NULL),
-(5, 'bedankt', 'tack', NULL),
-(6, 'alsjeblieft', 'snälla', NULL),
-(7, 'ja', 'ja', NULL),
-(8, 'nee', 'nej', NULL),
-(9, 'misschien', 'kanske', NULL),
-(10, 'sorry', 'förlåt', NULL),
-(11, 'water', 'vatten', NULL),
-(12, 'eten', 'mat', NULL),
-(13, 'brood', 'bröd', NULL),
-(14, 'appel', 'äpple', NULL),
-(15, 'melk', 'mjölk', NULL),
-(16, 'koffie', 'kaffe', NULL),
-(17, 'thee', 'te', NULL),
-(18, 'suiker', 'socker', NULL),
-(19, 'zout', 'salt', NULL),
-(20, 'rijst', 'ris', NULL),
-(21, 'huis', 'hus', NULL),
-(22, 'kamer', 'rum', NULL),
-(23, 'deur', 'dörr', NULL),
-(24, 'raam', 'fönster', NULL),
-(25, 'stoel', 'stol', NULL),
-(26, 'tafel', 'bord', NULL),
-(27, 'bed', 'säng', NULL),
-(28, 'lamp', 'lampa', NULL),
-(29, 'sleutel', 'nyckel', NULL),
-(30, 'straat', 'gata', NULL),
-(31, 'school', 'skola', NULL),
-(32, 'docent', 'lärare', NULL),
-(33, 'student', 'student', NULL),
-(34, 'boek', 'bok', NULL),
-(35, 'pen', 'penna', NULL),
-(36, 'papier', 'papper', NULL),
-(37, 'vriend', 'vän', NULL),
-(38, 'familie', 'familj', NULL),
-(39, 'kind', 'barn', NULL),
-(40, 'werk', 'arbete', NULL);
+INSERT INTO `words` (`id`, `dutch_word`, `swedish_word`, `level`, `example_nl`, `example_sv`) VALUES
+(1, 'hallo', 'hej', NULL, 'Hallo!', 'Hej!'),
+(2, 'goedemorgen', 'god morgon', NULL, 'Goedemorgen allemaal', 'God morgon allihopa'),
+(3, 'goedenavond', 'god kväll', NULL, 'Goedenavond iedereen', 'God kväll allihopa'),
+(4, 'tot ziens', 'hej då', NULL, 'Tot ziens later', 'Hej då senare'),
+(5, 'bedankt', 'tack', NULL, 'Bedankt voor je hulp', 'Tack för din hjälp'),
+(6, 'alsjeblieft', 'snälla', NULL, 'Alsjeblieft neem dit', 'Snälla ta detta'),
+(7, 'ja', 'ja', NULL, 'Ja dat klopt', 'Ja det stämmer'),
+(8, 'nee', 'nej', NULL, 'Nee dat kan niet', 'Nej det går inte'),
+(9, 'misschien', 'kanske', NULL, 'Misschien morgen', 'Kanske imorgon'),
+(10, 'sorry', 'förlåt', NULL, 'Sorry voor de fout', 'Förlåt för felet'),
+(11, 'water', 'vatten', NULL, 'Ik drink water', 'Jag dricker vatten'),
+(12, 'eten', 'mat', NULL, 'Ik ga eten', 'Jag ska äta mat'),
+(13, 'brood', 'bröd', NULL, 'Ik eet brood', 'Jag äter bröd'),
+(14, 'appel', 'äpple', NULL, 'Ik eet een appel', 'Jag äter ett äpple'),
+(15, 'melk', 'mjölk', NULL, 'Ik drink melk', 'Jag dricker mjölk'),
+(16, 'koffie', 'kaffe', NULL, 'Ik drink koffie', 'Jag dricker kaffe'),
+(17, 'thee', 'te', NULL, 'Ik drink thee', 'Jag dricker te'),
+(18, 'suiker', 'socker', NULL, 'Suiker in mijn koffie', 'Socker i mitt kaffe'),
+(19, 'zout', 'salt', NULL, 'Te veel zout', 'För mycket salt'),
+(20, 'rijst', 'ris', NULL, 'Ik eet rijst', 'Jag äter ris'),
+(21, 'huis', 'hus', NULL, 'Mijn huis is groot', 'Mitt hus är stort'),
+(22, 'kamer', 'rum', NULL, 'De kamer is klein', 'Rummet är litet'),
+(23, 'deur', 'dörr', NULL, 'De deur is open', 'Dörren är öppen'),
+(24, 'raam', 'fönster', NULL, 'Het raam is dicht', 'Fönstret är stängt'),
+(25, 'stoel', 'stol', NULL, 'De stoel staat hier', 'Stolen står här'),
+(26, 'tafel', 'bord', NULL, NULL, NULL),
+(27, 'bed', 'säng', NULL, NULL, NULL),
+(28, 'lamp', 'lampa', NULL, NULL, NULL),
+(29, 'sleutel', 'nyckel', NULL, NULL, NULL),
+(30, 'straat', 'gata', NULL, NULL, NULL),
+(31, 'school', 'skola', NULL, NULL, NULL),
+(32, 'docent', 'lärare', NULL, NULL, NULL),
+(33, 'student', 'student', NULL, NULL, NULL),
+(34, 'boek', 'bok', NULL, NULL, NULL),
+(35, 'pen', 'penna', NULL, NULL, NULL),
+(36, 'papier', 'papper', NULL, NULL, NULL),
+(37, 'vriend', 'vän', NULL, NULL, NULL),
+(38, 'familie', 'familj', NULL, NULL, NULL),
+(39, 'kind', 'barn', NULL, NULL, NULL),
+(40, 'werk', 'arbete', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -210,9 +231,15 @@ CREATE TABLE `word_progress` (
 --
 
 --
--- Indexes for table `custom_words`
+-- Indexes for table `custom_lessons`
 --
-ALTER TABLE `custom_words`
+ALTER TABLE `custom_lessons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `custom_lesson_words`
+--
+ALTER TABLE `custom_lesson_words`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -251,9 +278,15 @@ ALTER TABLE `word_progress`
 --
 
 --
--- AUTO_INCREMENT for table `custom_words`
+-- AUTO_INCREMENT for table `custom_lessons`
 --
-ALTER TABLE `custom_words`
+ALTER TABLE `custom_lessons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `custom_lesson_words`
+--
+ALTER TABLE `custom_lesson_words`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -272,7 +305,7 @@ ALTER TABLE `sentences`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `words`

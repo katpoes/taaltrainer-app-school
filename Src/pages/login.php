@@ -43,7 +43,7 @@ $error="Login fout";
 
 <input name="username" placeholder="username">
 
-<input type="password" name="password">
+<input type="password" placeholder="password" name="password">
 
 <button name="login" class="btn">Login</button>
 
