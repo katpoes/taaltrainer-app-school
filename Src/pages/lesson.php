@@ -7,36 +7,42 @@ header("Location: login.php");
 exit;
 }
 
-/* feedback reset */
-$feedback="";
+$feedback = "";
 
 /* woord ophalen */
-$stmt=$pdo->query("SELECT * FROM words ORDER BY RAND() LIMIT 1");
-$data=$stmt->fetch();
+
+$stmt = $pdo->query("SELECT * FROM words ORDER BY RAND() LIMIT 1");
+$data = $stmt->fetch();
 
 /* antwoord controleren */
+
 if(isset($_POST["answer"])){
 
-$user=strtolower(trim($_POST["answer"]));
-$correct=strtolower(trim($_POST["correct"]));
+$user = $_POST["answer"];
+$correct = $_POST["correct"];
 
-if($user==$correct){
+if($user == $correct){
 
-$feedback="Goed!";
+$feedback = "Goed!";
 
 }else{
 
-$feedback="Fout! Correct antwoord: ".$correct;
+$feedback = "Fout! Correct antwoord: ".$correct;
 
 }
 
 }
 
-/* multiple choice opties */
-$stmt=$pdo->query("SELECT swedish_word FROM words ORDER BY RAND() LIMIT 3");
-$options=$stmt->fetchAll();
+/* 3 random foute opties */
 
-$options[]=["swedish_word"=>$data["swedish_word"]];
+$stmt = $pdo->query("SELECT swedish_word FROM words WHERE swedish_word != '".$data["swedish_word"]."' ORDER BY RAND() LIMIT 3");
+$options = $stmt->fetchAll();
+
+/* juiste antwoord toevoegen */
+
+$options[] = ["swedish_word"=>$data["swedish_word"]];
+
+/* shuffle antwoorden */
 
 shuffle($options);
 
@@ -50,8 +56,6 @@ shuffle($options);
 
 <?php if($feedback==""){ ?>
 
-<!-- vraag -->
-
 <p>Wat is <b><?php echo $data["dutch_word"]; ?></b> in het Zweeds?</p>
 
 <form method="POST">
@@ -59,11 +63,13 @@ shuffle($options);
 <input type="hidden" name="correct" value="<?php echo $data["swedish_word"]; ?>">
 
 <?php
+
 foreach($options as $opt){
 
 echo '<button class="btn option" name="answer" value="'.$opt["swedish_word"].'">'.$opt["swedish_word"].'</button>';
 
 }
+
 ?>
 
 </form>

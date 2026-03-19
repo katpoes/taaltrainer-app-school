@@ -3,13 +3,13 @@ require_once "../classes/db.php";
 
 if(isset($_POST["register"])){
 
-$username=$_POST["username"];
+$email=$_POST["email"];
 
 $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
 
-$stmt=$pdo->prepare("INSERT INTO users(username,password) VALUES (?,?)");
+$stmt=$pdo->prepare("INSERT INTO users(email,password) VALUES (?,?)");
 
-$stmt->execute([$username,$password]);
+$stmt->execute([$email,$password]);
 
 header("Location: login.php");
 
@@ -24,9 +24,9 @@ header("Location: login.php");
 
 <form method="POST">
 
-<input name="username">
+<input name="email" placeholder="email">
 
-<input type="password" name="password">
+<input type="password" placeholder="password" name="password">
 
 <button name="register" class="btn">Register</button>
 

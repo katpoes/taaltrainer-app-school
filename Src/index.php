@@ -15,7 +15,7 @@ exit;
 
 <h1>Taaltrainer</h1>
 
-<p>Welkom <?php echo $_SESSION["username"]; ?></p>
+<p>Welkom <?php echo $_SESSION["email"]; ?></p>
 
 <a class="btn" href="pages/lesson.php">Start les</a>
 

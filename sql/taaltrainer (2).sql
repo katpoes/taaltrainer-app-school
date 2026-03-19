@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2026 at 09:13 AM
+-- Generation Time: Mar 19, 2026 at 09:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -140,7 +140,7 @@ INSERT INTO `sentences` (`id`, `dutch_sentence`, `swedish_sentence`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -148,9 +148,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(2, 'Thomas', '$2y$10$j2CnfMbJ1C6K39VQ7Wt/8eQoMmghe746w9Hmgs2Ig7C6nK5BV4sxW'),
-(3, 'testuser', '$2y$10$pIDEVZayy7TpJ7NIQzUetO6NNNW6GxD8.4NRWkRfIC4RabVPK0LDK');
+INSERT INTO `users` (`id`, `email`, `password`) VALUES
+(2, 'Thomas@example.com', '$2y$10$j2CnfMbJ1C6K39VQ7Wt/8eQoMmghe746w9Hmgs2Ig7C6nK5BV4sxW'),
+(3, 'testuser@example.com', '$2y$10$pIDEVZayy7TpJ7NIQzUetO6NNNW6GxD8.4NRWkRfIC4RabVPK0LDK');
 
 -- --------------------------------------------------------
 
@@ -259,7 +259,8 @@ ALTER TABLE `sentences`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`email`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `words`

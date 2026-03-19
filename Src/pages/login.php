@@ -6,18 +6,18 @@ $error="";
 
 if(isset($_POST["login"])){
 
-$username=$_POST["username"];
+$email=$_POST["email"];
 $password=$_POST["password"];
 
-$stmt=$pdo->prepare("SELECT * FROM users WHERE username=?");
-$stmt->execute([$username]);
+$stmt=$pdo->prepare("SELECT * FROM users WHERE email=?");
+$stmt->execute([$email]);
 
 $user=$stmt->fetch();
 
 if($user && password_verify($password,$user["password"])){
 
 $_SESSION["user_id"]=$user["id"];
-$_SESSION["username"]=$user["username"];
+$_SESSION["email"]=$user["email"];
 
 header("Location: ../index.php");
 exit;
@@ -41,7 +41,7 @@ $error="Login fout";
 
 <form method="POST">
 
-<input name="username" placeholder="username">
+<input name="email" placeholder="email">
 
 <input type="password" placeholder="password" name="password">
 
