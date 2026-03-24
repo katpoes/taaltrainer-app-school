@@ -30,6 +30,8 @@ header("Location: login.php");
 
 <button name="register" class="btn">Register</button>
 
+<a href="login.php">Terug naar login</a>
+
 </form>
 
 </div>
