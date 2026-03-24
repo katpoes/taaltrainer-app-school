@@ -47,3 +47,25 @@ display:block;
 .error{
 color:red;
 }
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+}
+
+th,td{
+
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:left;
+
+}
+
+th{
+
+background:#f2f4f8;
+
+}
